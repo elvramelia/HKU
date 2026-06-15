@@ -8,22 +8,9 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
-
-            $table->id();
-
-            $table->foreignId('category_id')
-                ->constrained()
-                ->cascadeOnDelete();
-
-            $table->string('nama_produk');
-            $table->string('slug')->unique();
-            $table->string('gambar');
-            $table->longText('deskripsi');
-            $table->longText('spesifikasi')->nullable();
-
-            $table->timestamps();
-
+         Schema::table('products', function (Blueprint $table) {
+            $table->string('tipe')->nullable()->after('category_id'); // Menambahkan kolom tipe
+            $table->dropColumn('gambar'); // Hapus kolom gambar lama, karena kita pakai tabel baru
         });
     }
 
