@@ -10,9 +10,12 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware): void {
-        //
+    ->withMiddleware(function (Middleware $middleware) {
+        // TAMBAHKAN KODE INI
+        $middleware->redirectUsersTo('/admin/dashboard'); // User login dikirim ke sini
+        $middleware->redirectGuestsTo('/login'); // Tamu dikirim ke sini
     })
-    ->withExceptions(function (Exceptions $exceptions): void {
+    ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
+    
