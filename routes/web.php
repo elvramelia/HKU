@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
 
 // Route Redirect /admin ke /admin/dashboard
 Route::get('/admin', function () {
@@ -20,6 +21,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout'); // I
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('products', ProductController::class);
+     // Route Kategori (TAMBAHKAN INI)
+    Route::resource('categories', CategoryController::class);
 });
 
 // Route Frontend
@@ -29,3 +32,4 @@ Route::view('/produk', 'product');
 Route::view('/produk/detail', 'detailproduk');
 Route::view('/artikel', 'artikel');
 Route::view('/kontak', 'contact');
+

@@ -7,12 +7,18 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     public function up(): void
-    {
-         Schema::table('products', function (Blueprint $table) {
-            $table->string('tipe')->nullable()->after('category_id'); // Menambahkan kolom tipe
-            $table->dropColumn('gambar'); // Hapus kolom gambar lama, karena kita pakai tabel baru
-        });
-    }
+{
+    Schema::create('products', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('category_id')->constrained()->onDelete('cascade');
+        $table->string('nama_produk');
+        $table->string('slug')->unique(); // Tambahkan slug
+        $table->string('tipe')->nullable(); // Tambahkan tipe
+        $table->text('deskripsi')->nullable(); // Tambahkan deskripsi
+        $table->text('spesifikasi')->nullable(); // Tambahkan spesifikasi
+        $table->timestamps();
+    });
+}
 
     public function down(): void
     {

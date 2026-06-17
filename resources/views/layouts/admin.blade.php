@@ -31,7 +31,7 @@
         <ul class="sidebar-menu">
             <li><a href="/admin/dashboard" class="{{ request()->is('admin/dashboard') ? 'active' : '' }}"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a></li>
             <li><a href="/admin/products" class="{{ request()->is('admin/products*') ? 'active' : '' }}"><i class="bi bi-box-seam-fill"></i> Produk</a></li>
-            <li><a href="#"><i class="bi bi-tags-fill"></i> Kategori</a></li>
+            <li><a href="{{ route('admin.categories.index') }}" class="{{ request()->is('admin/categories*') ? 'active' : '' }}"><i class="bi bi-tags-fill"></i> Kategori</a></li>
             <li><a href="#"><i class="bi bi-newspaper"></i> Artikel</a></li>
             <li><a href="#"><i class="bi bi-envelope-fill"></i> Pesan Masuk</a></li>
             <li><a href="#"><i class="bi bi-chat-quote-fill"></i> Testimoni</a></li>

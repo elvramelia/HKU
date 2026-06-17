@@ -10,21 +10,23 @@
     <div class="card-body p-4">
         <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bold">Nama Produk</label>
-                    <input type="text" name="nama_produk" class="form-control" value="{{ old('nama_produk') }}" required>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bold">Kategori</label>
-                    <select name="category_id" class="form-select" required>
-                        <option value="">Pilih Kategori</option>
-                        @foreach($categories as $cat)
-                        <option value="{{ $cat->id }}">{{ $cat->nama_kategori }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
+           <div class="row">
+    <div class="col-md-6 mb-3">
+        <label class="form-label fw-bold">Nama Produk</label>
+        <input type="text" name="nama_produk" class="form-control" value="{{ old('nama_produk') }}" required>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label class="form-label fw-bold">Kategori</label>
+        <select name="category_id" class="form-select" required>
+            <option value="">Pilih Kategori</option>
+            @foreach($categories as $cat)
+                <option value="{{ $cat->id }}" @selected(old('category_id') == $cat->id)>
+                    {{ $cat->nama_kategori }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+</div>
             
             <div class="mb-3">
                 <label class="form-label fw-bold">Tipe Produk (Contoh: Progressive / Modulating)</label>
