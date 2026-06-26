@@ -121,11 +121,9 @@
             display: none !important;
         }
 
-        /* ===== HERO ===== */
+                /* ===== HERO ===== */
         .hero-section {
             min-height: 100vh;
-            display: flex;
-            align-items: center;
             position: relative;
             background: #0a1628;
             overflow: hidden;
@@ -1550,6 +1548,87 @@
         a .product-category {
             color: #ef4444;
         }
+
+        .hero-bg-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Sesuaikan tinggi hero section Anda */
+    min-height: 80vh; 
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Overlay gelap agar teks putih terbaca */
+    z-index: 2;
+}
+
+/* Agar carousel item punya tinggi */
+.carousel-item {
+    height: 80vh; /* Samakan dengan min-height hero-bg */
+    position: relative;
+}
+
+        /* ===== DINAMIC BANNER SLIDER ===== */
+        .hero-bg-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Gelap agar teks terbaca */
+            z-index: 2;
+        }
+
+        .carousel-item {
+            height: 90vh; /* Sesuaikan tinggi slider, bisa 100vh jika ingin full screen */
+            position: relative;
+        }
+
+        /* Override caption bawaan Bootstrap agar teks benar-benar di tengah */
+        .carousel-caption {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 3;
+        }
+
+        /* Override agar tombol navigasi slider tetap kelihatan */
+        .carousel-control-prev, .carousel-control-next {
+            z-index: 4;
+            width: 5%;
+        }
+
     </style>
 </head>
 <body>

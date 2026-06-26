@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Testimonial;
+use App\Models\Message;
 
 class DashboardController extends Controller
 {
@@ -16,11 +18,11 @@ class DashboardController extends Controller
             $productCount = 0;
         }
 
-        try {
-            $articleCount = \App\Models\Article::count();
-        } catch (\Exception $e) {
-            $articleCount = 0;
-        }
+        $productCount = Product::count();
+        $testimonialCount = Testimonial::count();
+        $unreadMessages = Message::where('is_read', 0)->count(); // Asumsi ada tabel messages
+
+        return view('admin.dashboard', compact('productCount', 'testimonialCount', 'unreadMessages'));
 
         try {
             $unreadMessages = \App\Models\Contact::where('status', 'Belum Dibaca')->count();
@@ -29,5 +31,7 @@ class DashboardController extends Controller
         }
 
         return view('admin.dashboard', compact('productCount', 'articleCount', 'unreadMessages'));
+
+
     }
 }

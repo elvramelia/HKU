@@ -36,7 +36,9 @@
                         </div>
                         <div>
                             <h6>Kantor Pusat</h6>
-                            <p>Jl. Rungkut Industri I/No. 15<br>Surabaya 60293, Jawa Timur<br>Indonesia</p>
+                            <p>Spazio Tower Office Building Lantai 2 Unit 201<br>JL.Mayjend Jonosewono No.Kav 3<br>Surabaya, Jawa Timur
+
+Indonesia</p>
                         </div>
                     </div>
 
@@ -88,46 +90,67 @@
             </div>
 
             <!-- Contact Form -->
-            <div class="col-lg-7">
-                <div class="contact-form-card">
-                    <h4>Kirim Pesan</h4>
-                    <form>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control" placeholder="Masukkan nama Anda">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Email</label>
-                                <input type="email" class="form-control" placeholder="Masukkan email Anda">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">No. Telepon</label>
-                                <input type="tel" class="form-control" placeholder="Masukkan nomor telepon">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Subjek</label>
-                                <select class="form-control">
-                                    <option value="">Pilih Subjek</option>
-                                    <option>Konsultasi Produk</option>
-                                    <option>Permintaan Penawaran</option>
-                                    <option>Layanan Teknis</option>
-                                    <option>Lainnya</option>
-                                </select>
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label">Pesan</label>
-                                <textarea class="form-control" rows="5" placeholder="Tulis pesan Anda di sini..."></textarea>
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn-submit">
-                                    <i class="bi bi-send-fill me-2"></i> Kirim Pesan
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+           <!-- Contact Form -->
+<div class="col-lg-7">
+    <div class="contact-form-card">
+        <h4>Kirim Pesan</h4>
+        
+        <!-- Tambahkan action, method POST, dan @csrf -->
+        <form action="{{ route('contact.store') }}" method="POST">
+            @csrf
+            
+            <!-- Pesan Success / Error -->
+            @if(session('success'))
+                <div class="alert alert-success border-0 py-3">
+                    <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
+                </div>
+            @endif
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Nama Lengkap</label>
+                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Masukkan nama Anda" required>
+                    @error('name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="Masukkan email Anda" required>
+                    @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">No. Telepon</label>
+                    <input type="text" name="phone" class="form-control" value="{{ old('phone') }}" placeholder="Masukkan nomor telepon">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Subjek</label>
+                    <select name="subject" class="form-control">
+                        <option value="">Pilih Subjek</option>
+                        <option>Konsultasi Produk</option>
+                        <option>Permintaan Penawaran</option>
+                        <option>Layanan Teknis</option>
+                        <option>Lainnya</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Pesan</label>
+                    <textarea name="message" class="form-control @error('message') is-invalid @enderror" rows="5" placeholder="Tulis pesan Anda di sini..." required>{{ old('message') }}</textarea>
+                    @error('message')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn-submit">
+                        <i class="bi bi-send-fill me-2"></i> Kirim Pesan
+                    </button>
                 </div>
             </div>
+        </form>
+    </div>
+</div>
         </div>
     </div>
 </section>

@@ -21,8 +21,8 @@
         <div class="row align-items-center g-5">
             <div class="col-lg-5">
                 <div class="about-logo-box">
-                    <img src="https://picsum.photos/seed/hku-logo/200/200.jpg" alt="HKU Logo" 
-                         style="border-radius:12px;">
+                    <img src="{{ asset('images/logoHKU.png') }}" alt="Logo HKU" 
+     style="border-radius:12px; max-width: 200px; height: auto;">
                 </div>
             </div>
             <div class="col-lg-7 about-text">

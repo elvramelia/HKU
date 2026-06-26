@@ -23,19 +23,21 @@
             </div>
         </div>
     </div>
+
     <div class="col-md-4">
         <div class="stat-card border-0 shadow-sm">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <p class="text-muted mb-1 fw-bold" style="font-size:0.85rem">Total Artikel</p>
-                    <h2 class="fw-bold mb-0">{{ $articleCount }}</h2>
+                    <p class="text-muted mb-1 fw-bold" style="font-size:0.85rem">Total Testimoni</p>
+                    <h2 class="fw-bold mb-0">{{ $testimonialCount }}</h2>
                 </div>
-                <div class="icon-box bg-primary bg-opacity-10 text-primary">
-                    <i class="bi bi-newspaper"></i>
+                <div class="icon-box bg-warning bg-opacity-10 text-warning">
+                    <i class="bi bi-chat-quote-fill"></i>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="col-md-4">
         <div class="stat-card border-0 shadow-sm">
             <div class="d-flex justify-content-between align-items-center">
@@ -59,7 +61,7 @@
         <div class="text-center py-5 text-muted">
             <i class="bi bi-clipboard2-data fs-1 mb-3 d-block" style="opacity:0.3"></i>
             <p class="mb-0">Gunakan menu di sebelah kiri untuk mengelola website.</p>
-            <small>Anda bisa mulai menambahkan produk atau artikel baru.</small>
+            <small>Kelola Banner, Pesan, dan Testimoni dari sini.</small>
         </div>
     </div>
 </div>

@@ -4,7 +4,7 @@
             <!-- Brand -->
             <div class="col-lg-4 mb-4 mb-lg-0">
                 <div class="footer-brand">
-                    HK<span>U</span>
+                    Hardjadinata Karya Utama
                 </div>
                 <p class="footer-desc">
                     PT. Hardjadinata Karya Utama adalah perusahaan yang bergerak di bidang 
@@ -26,7 +26,6 @@
                     <li><a href="/">Beranda</a></li>
                     <li><a href="/tentang">Tentang Kami</a></li>
                     <li><a href="/produk">Produk</a></li>
-                    <li><a href="/artikel">Artikel</a></li>
                     <li><a href="/kontak">Kontak</a></li>
                 </ul>
             </div>
@@ -48,7 +47,9 @@
                 <h6 class="footer-title">Kontak</h6>
                 <div class="footer-contact-item">
                     <i class="bi bi-geo-alt-fill"></i>
-                    <p>Jl. Rungkut Industri I/No. 15, Surabaya 60293, Jawa Timur, Indonesia</p>
+                    <p>Spazio Tower Office Building Lantai 2 Unit 201<br>JL.Mayjend Jonosewono No.Kav 3<br>Surabaya, Jawa Timur
+
+Indonesia</p>
                 </div>
                 <div class="footer-contact-item">
                     <i class="bi bi-telephone-fill"></i>

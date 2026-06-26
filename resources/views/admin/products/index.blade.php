@@ -35,6 +35,9 @@
                             @endif
                         </td>
                         <td>
+                             <a href="{{ route('admin.products.edit', $item->id) }}" class="btn btn-sm btn-warning me-1">
+        <i class="bi bi-pencil-square"></i>
+    </a>
                             <form action="{{ route('admin.products.destroy', $item) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus produk ini?')">
                                 @csrf @method('DELETE')
                                 <button class="btn btn-sm btn-danger"><i class="bi bi-trash3-fill"></i></button>

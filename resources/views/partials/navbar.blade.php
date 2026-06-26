@@ -20,9 +20,10 @@
 <!-- Main Navbar -->
 <nav class="main-navbar navbar navbar-expand-lg">
     <div class="container">
-        <a class="navbar-brand" href="/">
-            HK<span>U</span>
-        </a>
+       <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+    <img src="{{ asset('images/logoHKU.png') }}" alt="HKU Logo" height="40">
+    Hardjadinata Karya Utama
+</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -38,9 +39,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/produk">Produk</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/artikel">Artikel</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/kontak">Kontak</a>

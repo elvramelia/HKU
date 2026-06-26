@@ -9,11 +9,10 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Beranda</a></li>
                 <li class="breadcrumb-item"><a href="/produk">Produk</a></li>
-                <!-- Nanti diganti variabel dinamis -->
-                <li class="breadcrumb-item active">Detail Produk</li> 
+                <li class="breadcrumb-item active">{{ $product->nama_produk }}</li>
             </ol>
         </nav>
-        <h1>Detail Produk</h1>
+        <h1>{{ $product->nama_produk }}</h1>
     </div>
 </section>
 
@@ -21,82 +20,116 @@
 <section class="product-detail-section">
     <div class="container">
         <div class="row g-5">
-            <!-- Image Column -->
+            <!-- Kolom Kiri: Gambar -->
             <div class="col-lg-6">
-                <!-- Cek apakah produk punya gambar -->
-                @php 
-                    // Ini contoh data statis dulu. Nanti saat data dikirim dari controller, ganti $product->images
-                    $hasImages = false; 
-                @endphp
+                <img id="mainImage" src="{{ $product->images->count() > 0 ? asset('storage/' . $product->images->first()->image_path) : 'https://via.placeholder.com/600x450?text=No+Image' }}" class="detail-img-main" alt="{{ $product->nama_produk }}">
                 
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?q=80&w=800" 
-                     alt="Product Image" 
-                     class="detail-img-main"
-                     id="mainImage">
-                
+                @if($product->images->count() > 1)
                 <div class="detail-img-thumbs">
-                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?q=80&w=200" 
-                         alt="Thumb 1" class="detail-thumb active"
-                         onclick="changeImage(this, 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?q=80&w=800')">
-                    <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?q=80&w=200" 
-                         alt="Thumb 2" class="detail-thumb"
-                         onclick="changeImage(this, 'https://images.unsplash.com/photo-1565008447742-97f6f38c985c?q=80&w=800')">
-                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=200" 
-                         alt="Thumb 3" class="detail-thumb"
-                         onclick="changeImage(this, 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=800')">
+                    @foreach($product->images as $key => $img)
+                        <img src="{{ asset('storage/' . $img->image_path) }}" 
+                             class="detail-thumb {{ $key == 0 ? 'active' : '' }}" 
+                             onclick="changeImage(this)" 
+                             alt="Thumb">
+                    @endforeach
                 </div>
+                @endif
             </div>
 
-            <!-- Info Column -->
+            <!-- Kolom Kanan: Info Produk -->
             <div class="col-lg-6">
-                <!-- Nanti Kategori ini diambil dari relasi $product->category->nama_kategori -->
-                <div class="detail-category">FBR Burner</div>
-                <h2 class="detail-title">FBR Series Industrial Burner</h2>
+                <div class="detail-category">{{ $product->category->nama_kategori ?? 'Lainnya' }}</div>
+                <h2 class="detail-title">{{ $product->nama_produk }}</h2>
                 
-                <p class="detail-desc">
-                    Burner industri seri FBR dirancang untuk memberikan performa pembakaran yang optimal 
-                    dan efisien. Dilengkapi dengan teknologi progressive dan modulating, burner ini 
-                    cocok untuk aplikasi boiler, kiln, dan heater industri dengan kapasitas menengah hingga besar. 
-                    Memiliki sistem kontrol keamanan berlapis dan mudah diintegrasikan dengan sistem otomasi pabrik.
-                </p>
+                @if($product->tipe)
+                    <p class="text-muted mb-3"><strong>Tipe:</strong> {{ $product->tipe }}</p>
+                @endif
 
-                <!-- Simple Specs Table (Dengan Tipe) -->
-                <table class="spec-table">
-                    <tr>
-                        <td>Kategori</td>
-                        <td>: FBR Burner</td> <!-- Nanti $product->category->nama_kategori -->
-                    </tr>
-                    <tr>
-                        <td>Tipe</td>
-                        <td>: Progressive / Modulating</td> <!-- Nanti $product->tipe -->
-                    </tr>
-                    <tr>
-                        <td>Bahan Bakar</td>
-                        <td>: Gas / Diesel (Dual Fuel)</td>
-                    </tr>
-                    <tr>
-                        <td>Kapasitas</td>
-                        <td>: 100 kW - 10 MW</td>
-                    </tr>
-                </table>
+                <div class="detail-desc">
+                    {!! nl2br(e($product->deskripsi)) !!}
+                </div>
 
-                <!-- Action Buttons -->
-                <div class="d-flex flex-wrap gap-3 mb-4">
+                <div class="d-flex gap-3 flex-wrap mt-4">
                     <a href="/kontak" class="btn-request-quote">
-                        <i class="bi bi-envelope-paper"></i> Minta Penawaran
+                        <i class="bi bi-envelope-fill"></i> Minta Penawaran
                     </a>
-                    <a href="https://wa.me/6281234567890?text=Halo%20HKU,%20saya%20tertarik%20dengan%20produk%20ini" target="_blank" class="btn-wa">
-                        <i class="bi bi-whatsapp"></i> Chat WhatsApp
+                    <a href="https://wa.me/6281216951155?text=Halo,%20saya%20tertarik%20dengan%20produk%20{{ urlencode($product->nama_produk) }}" target="_blank" class="btn-wa">
+                        <i class="bi bi-whatsapp"></i> Tanya via WhatsApp
                     </a>
                 </div>
 
-                <!-- Info Box -->
-                <div class="info-box">
-                    <h6><i class="bi bi-info-circle-fill"></i> Butuh Spesifikasi Teknis Lengkap?</h6>
-                    <p>Hubungi tim teknis kami untuk mendapatkan datasheet lengkap, manual book, dan konsultasi penentuan kapasitas yang tepat untuk industri Anda.</p>
+                <div class="info-box mt-4">
+                    <h6><i class="bi bi-info-circle-fill"></i> Informasi Tambahan</h6>
+                    <p>Untuk spesifikasi teknis lengkap, ketersediaan stok, dan harga terbaik, silakan hubungi tim sales kami melalui tombol di atas atau langsung ke nomor WhatsApp kami.</p>
                 </div>
             </div>
         </div>
+
+        <!-- Tab Spesifikasi (Jika Ada) -->
+        @if($product->spesifikasi)
+        <div class="row mt-5 pt-4">
+            <div class="col-12">
+                <ul class="nav nav-tabs detail-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="spec-tab" data-bs-toggle="tab" data-bs-target="#spec" type="button" role="tab">Spesifikasi</button>
+                    </li>
+                </ul>
+                <div class="tab-content p-4 border border-top-0 rounded-bottom" id="myTabContent">
+                    <div class="tab-pane fade show active" id="spec" role="tabpanel">
+                        <table class="spec-table">
+                            @php
+                                // Memecah spesifikasi per baris baru
+                                $specs = explode("\n", $product->spesifikasi);
+                            @endphp
+                            @foreach($specs as $spec)
+                                @if(trim($spec) !== '')
+                                    @php
+                                        // Misal format spesifikasi di database: "Nama Specs : Value"
+                                        $parts = explode(':', $spec, 2);
+                                        $label = trim($parts[0] ?? '');
+                                        $value = trim($parts[1] ?? '');
+                                    @endphp
+                                    <tr>
+                                        <td>{{ $label }}</td>
+                                        <td>{{ $value }}</td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+
+        <!-- Produk Terkait -->
+        @if($relatedProducts->count() > 0)
+        <div class="mt-5 pt-4 border-top">
+            <h4 class="fw-bold mb-4">Produk Lainnya</h4>
+            <div class="row g-4">
+                @foreach($relatedProducts as $item)
+                <div class="col-md-6 col-lg-3">
+                    <a href="/produk/{{ $item->slug }}" class="text-decoration-none">
+                        <div class="product-card">
+                            <div class="product-img">
+                                @if($item->images->count() > 0)
+                                    <img src="{{ asset('storage/' . $item->images->first()->image_path) }}" alt="{{ $item->nama_produk }}">
+                                @else
+                                    <img src="https://via.placeholder.com/600x400?text=No+Image" alt="No Image">
+                                @endif
+                            </div>
+                            <div class="product-body">
+                                <div class="product-category">{{ $item->category->nama_kategori ?? '' }}</div>
+                                <h5>{{ $item->nama_produk }}</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
+
     </div>
 </section>
 
@@ -104,9 +137,14 @@
 
 @section('scripts')
 <script>
-    function changeImage(thumb, newSrc) {
-        document.getElementById('mainImage').src = newSrc;
+    // Script untuk mengganti gambar utama saat thumbnail diklik
+    function changeImage(thumb) {
+        const mainImg = document.getElementById('mainImage');
+        mainImg.src = thumb.src;
+        
+        // Hapus class active dari semua thumb
         document.querySelectorAll('.detail-thumb').forEach(el => el.classList.remove('active'));
+        // Tambah class active ke thumb yang diklik
         thumb.classList.add('active');
     }
 </script>

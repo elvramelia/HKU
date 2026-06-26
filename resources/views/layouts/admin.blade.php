@@ -29,13 +29,16 @@
             <i class="bi bi-boiler" style="color:#ef4444"></i> HK<span>U</span> Admin
         </div>
         <ul class="sidebar-menu">
-            <li><a href="/admin/dashboard" class="{{ request()->is('admin/dashboard') ? 'active' : '' }}"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a></li>
-            <li><a href="/admin/products" class="{{ request()->is('admin/products*') ? 'active' : '' }}"><i class="bi bi-box-seam-fill"></i> Produk</a></li>
-            <li><a href="{{ route('admin.categories.index') }}" class="{{ request()->is('admin/categories*') ? 'active' : '' }}"><i class="bi bi-tags-fill"></i> Kategori</a></li>
-            <li><a href="#"><i class="bi bi-newspaper"></i> Artikel</a></li>
-            <li><a href="#"><i class="bi bi-envelope-fill"></i> Pesan Masuk</a></li>
-            <li><a href="#"><i class="bi bi-chat-quote-fill"></i> Testimoni</a></li>
-            <li class="mt-4"><a href="/"><i class="bi bi-globe2"></i> Lihat Website</a></li>
+            <li><a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a></li>
+            <li><a href="{{ route('admin.products.index') }}" class="{{ request()->routeIs('admin.products.*') ? 'active' : '' }}"><i class="bi bi-box-seam-fill"></i> Produk</a></li>
+            <li><a href="{{ route('admin.categories.index') }}" class="{{ request()->routeIs('admin.categories.*') ? 'active' : '' }}"><i class="bi bi-tags-fill"></i> Kategori</a></li>
+            
+            <!-- MENU YANG SUDAH DIPERBAIKI -->
+            <li><a href="{{ route('admin.banners.index') }}" class="{{ request()->routeIs('admin.banners.*') ? 'active' : '' }}"><i class="bi bi-image"></i> Banner</a></li>
+            <li><a href="{{ route('admin.messages.index') }}" class="{{ request()->routeIs('admin.messages.*') ? 'active' : '' }}"><i class="bi bi-envelope-fill"></i> Pesan Masuk</a></li>
+            <li><a href="{{ route('admin.testimonials.index') }}" class="{{ request()->routeIs('admin.testimonials.*') ? 'active' : '' }}"><i class="bi bi-chat-quote-fill"></i> Testimoni</a></li>
+            <!-- END MENU YANG DIPERBAIKI -->
+
             <li>
                 <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: contents;">
                     @csrf
